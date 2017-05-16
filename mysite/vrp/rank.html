@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>ranking list</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-table.css' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <script type="text/javascript" src="{% static 'jquery1x.js' %}"></script>
+    <script type="text/javascript" src="{% static 'jquery-1.11.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap-table.js' %}"></script>
+
+</head>
+<body style="font-size: 20px;">
+    <h1 class="ranktitle">Ranking List</h1>
+    <ul class="nav nav-pills ranknav">
+        <li class="active num332"><a href="#table1">3&nbsp;3&nbsp;2</a></li>
+        <li class="num553"><a href="#table2">5&nbsp;5&nbsp;3</a></li>
+        <li class="num884"><a href="#table3">8&nbsp;8&nbsp;4</a></li>
+        <li class="num10105"><a href="#table4">10&nbsp;10&nbsp;5</a></li>
+        <li class="num202010"><a href="#table5">20&nbsp;20&nbsp;10</a></li>
+        <li class="num252515"><a href="#table6">25&nbsp;25&nbsp;15</a></li>
+        <li class="num303020"><a href="#table7">30&nbsp;30&nbsp;20</a></li>
+    </ul>
+
+    <div id="div1"> 
+        <table id="table1" class="table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Algorithm</th>
+                    <th>Language</th>
+                    <th>Running Times</th>
+                    <th>Pathlength</th>
+                    <th>Submission Time</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="div2" style="display: none;">
+        <table id="table2" class="table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Algorithm</th>
+                    <th>Language</th>
+                    <th>Running Time</th>
+                    <th>Pathlength</th>
+                    <th>Submission Time</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="div3" style="display: none;">
+        <table id="table3" class="table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Algorithm</th>
+                    <th>Language</th>
+                    <th>Running Time</th>
+                    <th>Pathlength</th>
+                    <th>Submission Time</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="div4" style="display: none;">
+        <table id="table4" class="table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Algorithm</th>
+                    <th>Language</th>
+                    <th>Running Time</th>
+                    <th>Pathlength</th>
+                    <th>Submission Time</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="div5" style="display: none;">
+        <table id="table5" class="table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Algorithm</th>
+                    <th>Language</th>
+                    <th>Running Time</th>
+                    <th>Pathlength</th>
+                    <th>Submission Time</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="div6" style="display: none;">
+        <table id="table6" class="table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Algorithm</th>
+                    <th>Language</th>
+                    <th>Running Time</th>
+                    <th>Pathlength</th>
+                    <th>Submission Time</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="div7" style="display: none;">
+        <table id="table7" class="table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Algorithm</th>
+                    <th>Language</th>
+                    <th>Running Time</th>
+                    <th>Pathlength</th>
+                    <th>Submission Time</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    rankruntime1 = [];
+    rankruntime2 = [];
+    rankruntime3 = [];
+    rankruntime4 = [];
+    rankruntime5 = [];
+    rankruntime6 = [];
+    rankruntime7 = [];
+
+    $(document).ready(function() {
+        $.ajax({
+            type: "POST",
+            url: "rankruntimejson1",
+            datatype: "json",
+            success: function(data) {
+                if (data['status'] == 'error') {
+                    alert('error');
+                }
+                else {
+                    rankruntime1 = data['rankruntimemsg1'];
+                    $('#table1').bootstrapTable({
+                        data: rankruntime1,
+                        sortable: true,
+                        sortOrder: "asc",
+                        pagination: true,
+                        sidePagination: 'client',
+                        pageNumber: 1,
+                        pageSize: 10,
+                        paginationVAlign: 'bottom',
+                        paginationHAlign: 'right',
+                        paginationPreText: '<<',
+                        paginationNextText: '>>',
+                        columns: [{
+                            field: 0,
+                            title: 'Data'
+                        }, {
+                            field: 1,
+                            title: 'Algorithm'
+                        }, {
+                            field: 2,
+                            title: 'Language'
+                        }, {
+                            field: 3,
+                            title: 'Running Time',
+                            sortable: true
+                        }, {
+                            field: 4,
+                            title: 'Pathlength',
+                            sortable: true
+                        }, {
+                            field: 5,
+                            title: 'Submission Time',
+                            sortable: true
+                        },]
+                    });
+                }
+            },
+        });
+        $.ajax({
+            type: "POST",
+            url: "rankruntimejson2",
+            datatype: "json",
+            success: function(data) {
+                if (data['status'] == 'error') {
+                    alert('error');
+                }
+                else {
+                    rankruntime2 = data['rankruntimemsg2'];
+                    $('#table2').bootstrapTable({
+                        data: rankruntime2,
+                        sortable: true,
+                        sortOrder: "asc",
+                        pagination: true,
+                        sidePagination: 'client',
+                        pageNumber: 1,
+                        pageSize: 10,
+                        paginationVAlign: 'bottom',
+                        paginationHAlign: 'right',
+                        paginationPreText: '<<',
+                        paginationNextText: '>>',
+                        columns: [{
+                            field: 0,
+                            title: 'Data'
+                        }, {
+                            field: 1,
+                            title: 'Algorithm'
+                        }, {
+                            field: 2,
+                            title: 'Language'
+                        }, {
+                            field: 3,
+                            title: 'Running Time',
+                            sortable: true
+                        }, {
+                            field: 4,
+                            title: 'Pathlength',
+                            sortable: true
+                        }, {
+                            field: 5,
+                            title: 'Submission Time',
+                            sortable: true
+                        },]
+                    });
+                }
+            },
+        });
+        $.ajax({
+            type: "POST",
+            url: "rankruntimejson3",
+            datatype: "json",
+            success: function(data) {
+                if (data['status'] == 'error') {
+                    alert('error');
+                }
+                else {
+                    rankruntime3 = data['rankruntimemsg3'];
+                    $('#table3').bootstrapTable({
+                        data: rankruntime3,
+                        sortable: true,
+                        sortOrder: "asc",
+                        pagination: true,
+                        sidePagination: 'client',
+                        pageNumber: 1,
+                        pageSize: 10,
+                        paginationVAlign: 'bottom',
+                        paginationHAlign: 'right',
+                        paginationPreText: '<<',
+                        paginationNextText: '>>',
+                        columns: [{
+                            field: 0,
+                            title: 'Data'
+                        }, {
+                            field: 1,
+                            title: 'Algorithm'
+                        }, {
+                            field: 2,
+                            title: 'Language'
+                        }, {
+                            field: 3,
+                            title: 'Running Time',
+                            sortable: true
+                        }, {
+                            field: 4,
+                            title: 'Pathlength',
+                            sortable: true
+                        }, {
+                            field: 5,
+                            title: 'Submission Time',
+                            sortable: true
+                        },]
+                    });
+                }
+            },
+        });
+        $.ajax({
+            type: "POST",
+            url: "rankruntimejson4",
+            datatype: "json",
+            success: function(data) {
+                if (data['status'] == 'error') {
+                    alert('error');
+                }
+                else {
+                    rankruntime4 = data['rankruntimemsg4'];
+                    $('#table4').bootstrapTable({
+                        data: rankruntime4,
+                        sortable: true,
+                        sortOrder: "asc",
+                        pagination: true,
+                        sidePagination: 'client',
+                        pageNumber: 1,
+                        pageSize: 10,
+                        paginationVAlign: 'bottom',
+                        paginationHAlign: 'right',
+                        paginationPreText: '<<',
+                        paginationNextText: '>>',
+                        columns: [{
+                            field: 0,
+                            title: 'Data'
+                        }, {
+                            field: 1,
+                            title: 'Algorithm'
+                        }, {
+                            field: 2,
+                            title: 'Language'
+                        }, {
+                            field: 3,
+                            title: 'Running Time',
+                            sortable: true
+                        }, {
+                            field: 4,
+                            title: 'Pathlength',
+                            sortable: true
+                        }, {
+                            field: 5,
+                            title: 'Submission Time',
+                            sortable: true
+                        },]
+                    });
+                }
+            },
+        });
+        $.ajax({
+            type: "POST",
+            url: "rankruntimejson5",
+            datatype: "json",
+            success: function(data) {
+                if (data['status'] == 'error') {
+                    alert('error');
+                }
+                else {
+                    rankruntime5 = data['rankruntimemsg5'];
+                    $('#table5').bootstrapTable({
+                        data: rankruntime5,
+                        sortable: true,
+                        sortOrder: "asc",
+                        pagination: true,
+                        sidePagination: 'client',
+                        pageNumber: 1,
+                        pageSize: 10,
+                        paginationVAlign: 'bottom',
+                        paginationHAlign: 'right',
+                        paginationPreText: '<<',
+                        paginationNextText: '>>',
+                        columns: [{
+                            field: 0,
+                            title: 'Data'
+                        }, {
+                            field: 1,
+                            title: 'Algorithm'
+                        }, {
+                            field: 2,
+                            title: 'Language'
+                        }, {
+                            field: 3,
+                            title: 'Running Time',
+                            sortable: true
+                        }, {
+                            field: 4,
+                            title: 'Pathlength',
+                            sortable: true
+                        }, {
+                            field: 5,
+                            title: 'Submission Time',
+                            sortable: true
+                        },]
+                    });
+                }
+            },
+        });
+        $.ajax({
+            type: "POST",
+            url: "rankruntimejson6",
+            datatype: "json",
+            success: function(data) {
+                if (data['status'] == 'error') {
+                    alert('error');
+                }
+                else {
+                    rankruntime6 = data['rankruntimemsg6'];
+                    $('#table6').bootstrapTable({
+                        data: rankruntime6,
+                        sortable: true,
+                        sortOrder: "asc",
+                        pagination: true,
+                        sidePagination: 'client',
+                        pageNumber: 1,
+                        pageSize: 10,
+                        paginationVAlign: 'bottom',
+                        paginationHAlign: 'right',
+                        paginationPreText: '<<',
+                        paginationNextText: '>>',
+                        columns: [{
+                            field: 0,
+                            title: 'Data'
+                        }, {
+                            field: 1,
+                            title: 'Algorithm'
+                        }, {
+                            field: 2,
+                            title: 'Language'
+                        }, {
+                            field: 3,
+                            title: 'Running Time',
+                            sortable: true
+                        }, {
+                            field: 4,
+                            title: 'Pathlength',
+                            sortable: true
+                        }, {
+                            field: 5,
+                            title: 'Submission Time',
+                            sortable: true
+                        },]
+                    });
+                }
+            },
+        });
+        $.ajax({
+            type: "POST",
+            url: "rankruntimejson7",
+            datatype: "json",
+            success: function(data) {
+                if (data['status'] == 'error') {
+                    alert('error');
+                }
+                else {
+                    rankruntime7 = data['rankruntimemsg7'];
+                    $('#table7').bootstrapTable({
+                        data: rankruntime7,
+                        sortable: true,
+                        sortOrder: "asc",
+                        pagination: true,
+                        sidePagination: 'client',
+                        pageNumber: 1,
+                        pageSize: 10,
+                        paginationVAlign: 'bottom',
+                        paginationHAlign: 'right',
+                        paginationPreText: '<<',
+                        paginationNextText: '>>',
+                        columns: [{
+                            field: 0,
+                            title: 'Data'
+                        }, {
+                            field: 1,
+                            title: 'Algorithm'
+                        }, {
+                            field: 2,
+                            title: 'Language'
+                        }, {
+                            field: 3,
+                            title: 'Running Time',
+                            sortable: true
+                        }, {
+                            field: 4,
+                            title: 'Pathlength',
+                            sortable: true
+                        }, {
+                            field: 5,
+                            title: 'Submission Time',
+                            sortable: true
+                        },]
+                    });
+                }
+            },
+        });
+
+        $(".ranknav li").click(function() {
+            $(".ranknav li").removeClass("active");
+            $(this).addClass("active");
+        });  
+
+        $(".num332").click(function() {
+            $("#div1").removeAttr("style");
+            $("#div2").attr("style", "display:none;");
+            $("#div3").attr("style", "display:none;");
+            $("#div4").attr("style", "display:none;");
+            $("#div5").attr("style", "display:none;");
+            $("#div6").attr("style", "display:none;");
+            $("#div7").attr("style", "display:none;");
+        });
+        $(".num553").click(function() {
+            $("#div2").removeAttr("style");
+            $("#div1").attr("style", "display:none;");
+            $("#div3").attr("style", "display:none;");
+            $("#div4").attr("style", "display:none;");
+            $("#div5").attr("style", "display:none;");
+            $("#div6").attr("style", "display:none;");
+            $("#div7").attr("style", "display:none;");
+        });
+        $(".num884").click(function() {
+            $("#div3").removeAttr("style");
+            $("#div1").attr("style", "display:none;");
+            $("#div2").attr("style", "display:none;");
+            $("#div4").attr("style", "display:none;");
+            $("#div5").attr("style", "display:none;");
+            $("#div6").attr("style", "display:none;");
+            $("#div7").attr("style", "display:none;");
+        });
+        $(".num10105").click(function() {
+            $("#div4").removeAttr("style");
+            $("#div1").attr("style", "display:none;");
+            $("#div2").attr("style", "display:none;");
+            $("#div3").attr("style", "display:none;");
+            $("#div5").attr("style", "display:none;");
+            $("#div6").attr("style", "display:none;");
+            $("#div7").attr("style", "display:none;");
+        });
+        $(".num202010").click(function() {
+            $("#div5").removeAttr("style");
+            $("#div1").attr("style", "display:none;");
+            $("#div2").attr("style", "display:none;");
+            $("#div3").attr("style", "display:none;");
+            $("#div4").attr("style", "display:none;");
+            $("#div6").attr("style", "display:none;");
+            $("#div7").attr("style", "display:none;");
+        });
+        $(".num252515").click(function() {
+            $("#div6").removeAttr("style");
+            $("#div1").attr("style", "display:none;");
+            $("#div2").attr("style", "display:none;");
+            $("#div4").attr("style", "display:none;");
+            $("#div5").attr("style", "display:none;");
+            $("#div3").attr("style", "display:none;");
+            $("#div7").attr("style", "display:none;");
+        });
+        $(".num303020").click(function() {
+            $("#div7").removeAttr("style");
+            $("#div1").attr("style", "display:none;");
+            $("#div2").attr("style", "display:none;");
+            $("#div4").attr("style", "display:none;");
+            $("#div5").attr("style", "display:none;");
+            $("#div6").attr("style", "display:none;");
+            $("#div3").attr("style", "display:none;");
+        });
+
+    });
+
+</script>
+</html>
